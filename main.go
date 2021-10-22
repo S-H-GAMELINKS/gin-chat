@@ -1,15 +1,20 @@
 package main
 
 import (
+	"github.com/S-H-GAMELINKS/gin-chat/database"
+	"github.com/S-H-GAMELINKS/gin-chat/routes"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.New()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, "Hello world!")
-	})
+	conn, err := database.SetUpDB()
+	if err != nil {
+		panic(err)
+	}
+
+	routes.SetUpRoutes(r, conn)
 
 	r.Run(":8000")
 }
