@@ -7,7 +7,7 @@ import (
 )
 
 func SetUpDB() (conn *gorm.DB, err error) {
-	conn, err = gorm.Open(sqlite.Open("./database/database.sqlite3"), &gorm.Config{
+	conn, err = gorm.Open(sqlite.Open("./database/database.sqlite"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 
