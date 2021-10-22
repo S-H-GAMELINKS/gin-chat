@@ -18,5 +18,5 @@ func NewHelloController(conn *gorm.DB) HelloController {
 }
 
 func (helloController *helloController) Index(c *gin.Context) {
-	c.JSON(200, "Hello world!")
+	c.HTML(200, "index.html", gin.H{})
 }
