@@ -10,6 +10,7 @@ require (
 	github.com/gin-gonic/gin v1.7.4 // indirect
 	github.com/go-ini/ini v1.38.2 // indirect
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
+	github.com/golang-migrate/migrate v3.5.4+incompatible // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.1 // indirect
 	github.com/golang/lint v0.0.0-20180702182130-06c8688daad7 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
