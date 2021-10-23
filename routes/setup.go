@@ -18,4 +18,5 @@ func SetUpRoutes(router *gin.Engine, database *gorm.DB) {
 	roomController := interactor.NewRoomControllerInstance(database)
 
 	router.GET("/rooms", roomController.Index)
+	router.POST("/rooms", roomController.Create)
 }

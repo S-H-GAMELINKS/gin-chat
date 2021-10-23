@@ -1,4 +1,9 @@
 {{ define "rooms/index.tmpl" }}
+<form method="post" action="/rooms">
+    <input name="name" type="text">
+    <input type="submit" value="Create">
+</form>
+
 <ul>
     {{range .rooms}}
         <li>{{.ID}}: {{.Name}}</li>
