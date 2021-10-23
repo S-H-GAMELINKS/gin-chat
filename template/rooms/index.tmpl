@@ -1,0 +1,7 @@
+{{ define "rooms/index.tmpl" }}
+<ul>
+    {{range .rooms}}
+        <li>{{.ID}}: {{.Name}}</li>
+    {{end}}
+</ul>
+{{ end }}
