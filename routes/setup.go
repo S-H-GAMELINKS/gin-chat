@@ -7,7 +7,7 @@ import (
 )
 
 func SetUpRoutes(router *gin.Engine, database *gorm.DB) {
-	router.LoadHTMLGlob("template/*")
+	router.LoadHTMLGlob("template/**/*")
 
 	interactor := controller.NewInteractor(database)
 
