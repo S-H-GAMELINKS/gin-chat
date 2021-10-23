@@ -41,8 +41,9 @@ func (roomController *roomController) Show(c *gin.Context) {
 	roomID, _ := strconv.ParseUint(c.Param("id"), 10, 64)
 
 	var room model.Room
+	room.ID = roomID
 
-	err := roomController.roomRepository.Find(roomController.db, roomID, &room)
+	err := roomController.roomRepository.Find(roomController.db, &room)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -67,5 +68,7 @@ func (roomController *roomController) Create(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	c.HTML(200, "rooms/show.tmpl", gin.H{"room": room})
+	redirectPath := "/rooms/" + strconv.FormatUint(room.ID, 10)
+
+	c.Redirect(302, redirectPath)
 }
