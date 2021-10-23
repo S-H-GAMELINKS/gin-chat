@@ -12,7 +12,7 @@ type roomRepository struct {
 
 type RoomRepository interface {
 	FindAll(db *gorm.DB, rooms *[]model.Room) (err error)
-	Find(db *gorm.DB, roomID uint64, room *model.Room) (err error)
+	Find(db *gorm.DB, room *model.Room) (err error)
 	Store(db *gorm.DB, room *model.Room) (err error)
 }
 
@@ -27,8 +27,10 @@ func (roomRepository *roomRepository) FindAll(db *gorm.DB, rooms *[]model.Room) 
 	return
 }
 
-func (roomRepository *roomRepository) Find(db *gorm.DB, roomID uint64, room *model.Room) (err error) {
-	if err = db.Find(&room).Error; err != nil {
+func (roomRepository *roomRepository) Find(db *gorm.DB, room *model.Room) (err error) {
+	if err = db.
+		Preload("Messages").
+		Find(&room).Error; err != nil {
 		log.Fatal(err)
 	}
 	return
