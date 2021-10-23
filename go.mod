@@ -39,6 +39,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/ini.v1 v1.38.2 // indirect
+	gopkg.in/olahol/melody.v1 v1.0.0-20170518105555-d52139073376 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/sqlite v1.1.6 // indirect
 	gorm.io/gorm v1.21.16 // indirect
