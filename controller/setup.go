@@ -12,6 +12,7 @@ type interactor struct {
 type Interactor interface {
 	NewHelloControllerInstance(conn *gorm.DB) HelloController
 	NewRoomControllerInstance(conn *gorm.DB) RoomController
+	NewMessageControllerInstance(conn *gorm.DB) MessageController
 }
 
 func NewInteractor(conn *gorm.DB) Interactor {
@@ -24,4 +25,8 @@ func (interactor *interactor) NewHelloControllerInstance(conn *gorm.DB) HelloCon
 
 func (interactor *interactor) NewRoomControllerInstance(conn *gorm.DB) RoomController {
 	return NewRoomController(conn, repository.NewRoomRepositoryInstance())
+}
+
+func (interactor *interactor) NewMessageControllerInstance(conn *gorm.DB) MessageController {
+	return NewMessageController(conn, repository.NewMessageRepositoryInstance())
 }
