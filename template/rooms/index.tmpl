@@ -6,7 +6,9 @@
 
 <ul>
     {{range .rooms}}
-        <li>{{.ID}}: {{.Name}}</li>
+        <a href="/rooms/{{.ID}}">
+            <li>{{.ID}}: {{.Name}}</li>
+        </a>
     {{end}}
 </ul>
 {{ end }}
