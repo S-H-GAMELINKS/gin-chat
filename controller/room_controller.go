@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/S-H-GAMELINKS/gin-chat/model"
 	"github.com/S-H-GAMELINKS/gin-chat/repository"
@@ -17,6 +18,7 @@ type roomController struct {
 
 type RoomController interface {
 	Index(c *gin.Context)
+	Show(c *gin.Context)
 	Create(c *gin.Context)
 }
 
@@ -32,6 +34,19 @@ func (roomController *roomController) Index(c *gin.Context) {
 		log.Fatal(err)
 	}
 	c.HTML(200, "rooms/index.tmpl", gin.H{"rooms": rooms})
+}
+
+func (roomController *roomController) Show(c *gin.Context) {
+
+	roomID, _ := strconv.ParseUint(c.Param("id"), 10, 64)
+
+	var room model.Room
+
+	err := roomController.roomRepository.Find(roomController.db, roomID, &room)
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.HTML(200, "rooms/show.tmpl", gin.H{"room": room})
 }
 
 func (roomController *roomController) Create(c *gin.Context) {
