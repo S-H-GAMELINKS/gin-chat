@@ -1,6 +1,19 @@
 {{ define "rooms/show.tmpl" }}
 <h2>{{.room.ID}}: {{.room.Name}}</h2>
 
+<form method="post" action="/rooms/{{ .room.ID }}/messages">
+    <input name="content" type="text">
+    <input type="submit" value="Create">
+</form>
+
+{{ if .room.Messages }}
+<ul>
+    {{range .room.Messages}}
+        <li>{{.ID}}: {{.Content}}</li>
+    {{end}}
+</ul>
+{{ end }}
+
 <a href="/rooms">Back to rooms</a>
 
 {{ end }}
