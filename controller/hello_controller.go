@@ -18,5 +18,5 @@ func NewHelloController(conn *gorm.DB) HelloController {
 }
 
 func (helloController *helloController) Index(c *gin.Context) {
-	c.HTML(200, "index.html", gin.H{})
+	c.HTML(200, "hello/index.tmpl", gin.H{})
 }
