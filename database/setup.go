@@ -12,12 +12,6 @@ func SetUpDB() (conn *gorm.DB, err error) {
 	})
 
 	db, err := conn.DB()
-	defer func() {
-		err = db.Close()
-		if err != nil {
-			panic(err)
-		}
-	}()
 	if err != nil {
 		db.Close()
 	}
