@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/S-H-GAMELINKS/gin-chat/repository"
+	"gopkg.in/olahol/melody.v1"
 	"gorm.io/gorm"
 )
 
@@ -12,7 +13,7 @@ type interactor struct {
 type Interactor interface {
 	NewHelloControllerInstance(conn *gorm.DB) HelloController
 	NewRoomControllerInstance(conn *gorm.DB) RoomController
-	NewMessageControllerInstance(conn *gorm.DB) MessageController
+	NewMessageControllerInstance(conn *gorm.DB, m *melody.Melody) MessageController
 }
 
 func NewInteractor(conn *gorm.DB) Interactor {
@@ -27,6 +28,6 @@ func (interactor *interactor) NewRoomControllerInstance(conn *gorm.DB) RoomContr
 	return NewRoomController(conn, repository.NewRoomRepositoryInstance())
 }
 
-func (interactor *interactor) NewMessageControllerInstance(conn *gorm.DB) MessageController {
-	return NewMessageController(conn, repository.NewMessageRepositoryInstance())
+func (interactor *interactor) NewMessageControllerInstance(conn *gorm.DB, m *melody.Melody) MessageController {
+	return NewMessageController(conn, m, repository.NewMessageRepositoryInstance())
 }

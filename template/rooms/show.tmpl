@@ -1,13 +1,12 @@
 {{ define "rooms/show.tmpl" }}
 <h2>{{.room.ID}}: {{.room.Name}}</h2>
 
-<form method="post" action="/rooms/{{ .room.ID }}/messages">
-    <input name="content" type="text">
-    <input type="submit" value="Create">
-</form>
+<div id="message">
+    <input id="content" name="content" type="text">
+</div>
 
 {{ if .room.Messages }}
-<ul>
+<ul id="messages">
     {{range .room.Messages}}
         <li>{{.ID}}: {{.Content}}</li>
     {{end}}
@@ -15,5 +14,30 @@
 {{ end }}
 
 <a href="/rooms">Back to rooms</a>
+
+<script>
+    const url = "ws://" + window.location.host + window.location.pathname + "/messages/ws";
+    const ws = new WebSocket(url);
+
+    let input = document.getElementById("content");
+
+    let messages = document.getElementById("messages");
+
+    ws.onmessage = function (msg) {
+        console.log(msg);
+        var line =  msg.data;
+        messages.innerHTML += `<li>${line}</li>`;
+    };
+
+    input.onkeydown = function (e) {
+        if (e.keyCode === 13 && input.value !== "") {
+
+            ws.send(input.value)
+            console.log(url);
+            console.log(ws);
+            input.value = "";
+        }
+    };
+</script>
 
 {{ end }}
